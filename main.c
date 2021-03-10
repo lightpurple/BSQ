@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:07:07 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/10 21:07:50 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/10 21:19:58 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char *argv[])
 		fd = open(f_name, O_RDONLY);
 		bsq(fd);
 		close(fd);
+		free(f_name);
 	}
 	else
 	{
@@ -36,5 +37,4 @@ int	main(int argc, char *argv[])
 			close(fd);
 		}
 	}
-	free(f_name);
 }
