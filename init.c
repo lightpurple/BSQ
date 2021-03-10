@@ -6,13 +6,18 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/10 20:35:22 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/10 20:46:52 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-void			init_map(int **copy_map, t_info *info)
+void			change_map(int **copy_map, t_info *info)
+{
+
+}
+
+void			dobby_is_free(int **copy_map)
 {
 
 }

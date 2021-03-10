@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   etc.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 17:07:07 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/10 21:07:50 by euhong           ###   ########.fr       */
+/*   Created: 2021/03/10 20:40:13 by euhong            #+#    #+#             */
+/*   Updated: 2021/03/10 21:07:43 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-int	main(int argc, char *argv[])
+void	finish_map(char **map, t_info info, t_xy loc)
 {
-	int		fd;
-	int		i;
-	int		size;
-	char	*f_name;
+}
+void	map_cpy(int **copy_map, char **map)
+{
+}
 
-	i = 0;
-	if (argc == 1)
-	{
-		f_name = read_stdin();
-		fd = open(f_name, O_RDONLY);
-		bsq(fd);
-		close(fd);
-	}
-	else
-	{
-		while (++i < argc)
-		{
-			fd = open(argv[i], O_RDONLY);
-			bsq(fd);
-			close(fd);
-		}
-	}
-	free(f_name);
+int		ft_atoi(char *str)
+{
 }

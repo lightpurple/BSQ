@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 17:07:07 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/10 21:07:50 by euhong           ###   ########.fr       */
+/*   Created: 2021/03/10 20:47:53 by euhong            #+#    #+#             */
+/*   Updated: 2021/03/10 20:50:12 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-int	main(int argc, char *argv[])
+void	ft_putstr(char *str)
 {
-	int		fd;
-	int		i;
-	int		size;
-	char	*f_name;
+	while (*str)
+		write(2, str++, 1);
+	write(2, "\n", 1);
+}
 
-	i = 0;
-	if (argc == 1)
-	{
-		f_name = read_stdin();
-		fd = open(f_name, O_RDONLY);
-		bsq(fd);
-		close(fd);
-	}
-	else
-	{
-		while (++i < argc)
-		{
-			fd = open(argv[i], O_RDONLY);
-			bsq(fd);
-			close(fd);
-		}
-	}
-	free(f_name);
+void	print_map(char **map)
+{
+
+}
+
+void	print_err(void)
+{
+	ft_putstr("Map Error!");
 }

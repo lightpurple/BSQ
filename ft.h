@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:06:06 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/10 20:22:20 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/10 21:09:35 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,20 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# define BUF_SIZE 1000
 
 void			bsq(int fd);
 int				check_err(int fd, char **map);
-void			init_map(int **copy_map, t_info *info);
+void			change_map(int **copy_map, t_info *info);
 void			fill_map(int **copy_map, t_xy *loc);
 void			map_cpy(int **map_cpy, char **map);
 void			finish_map(char **map, t_info info, t_xy loc);
+void			print_err(void);
 void			print_map(char **map);
+int				ft_file_size(int fd);
+char			*read_stdin(void);
+void			dobby_is_free(void **map, t_info info);
+int				ft_atoi(char *rows);
 
 typedef struct	s_info
 {
