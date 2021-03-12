@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   etc2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: dookim <dookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 20:47:53 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/12 21:02:39 by dookim           ###   ########.fr       */
+/*   Created: 2021/03/12 21:06:52 by dookim            #+#    #+#             */
+/*   Updated: 2021/03/12 21:09:43 by dookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-void	ft_putstr(char *str)
+int	ft_is_c_in_str(char c, char *str)
 {
-	write(2, str, ft_strlen(str));
-	write(2, "\n", 1);
-}
-
-void	print_map(char **map)
-{
-	
-}
-
-void	print_err(void)
-{
-	ft_putstr("Map Error!");
+	while (*str)
+	{
+		if (c == *str)
+			return (1);
+		str++;
+	}
+	return (0);
 }
