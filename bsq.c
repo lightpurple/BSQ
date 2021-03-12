@@ -6,18 +6,18 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:18:46 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/10 20:58:03 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/12 22:27:04 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
+t_info	info;
 
-void	bsq(int fd)
+void	bsq(int fd1, int fd2)
 {
 	char	**map;
 	int		**copy_map;
 	t_xy	loc;
-	t_info	info;
 
 	if (check_err(fd, map)) // 인자로 주어진 파일을 읽으면서 error체크와 동시에 map에 저장
 	{

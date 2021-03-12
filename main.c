@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:07:07 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/10 21:19:58 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/12 22:27:08 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	main(int argc, char *argv[])
 {
-	int		fd;
+	int		fd1;
+	int		fd2;
 	int		i;
 	int		size;
 	char	*f_name;
@@ -23,9 +24,11 @@ int	main(int argc, char *argv[])
 	if (argc == 1)
 	{
 		f_name = read_stdin();
-		fd = open(f_name, O_RDONLY);
-		bsq(fd);
-		close(fd);
+		fd1 = open(f_name, O_RDONLY);
+		fd2 = open(f_name, O_RDONLY);
+		bsq(fd1, fd2);
+		close(fd1);
+		close(fd2);
 		free(f_name);
 	}
 	else
