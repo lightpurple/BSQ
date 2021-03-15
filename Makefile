@@ -1,12 +1,19 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror
-SRCS=*.c
+SRCS=$(wildcard *.c)
+OBJS=$(SRC:.c=.o)
 TARGET=BSQ
 
 all : $(TARGET)
 
-$(TARGET) : $(SRCS)
+$(TARGET) : $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 
+%.o : %.c
+	$(CC) $(CFLAGS) -c $<
+
 clean :
-	rm $(TARGET)
+	$(RM) $(OBJS)
+
+fclean :
+	$(RM) $(TARGET) $(OBJS)
