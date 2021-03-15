@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:32:18 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 20:50:07 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/15 21:48:33 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ extern t_info g_info; // malloc하기
 
 int	check_deserve(char c)
 {
-	if (c != g_info.emt || c != g_info.block || c != g_info.fill)
+	if (c != g_info.emt && c != g_info.block && c != g_info.fill &&
+			c != '\n' && c != '\0')
 		return (FAIL);
 	return (SUCCESS);
 }
@@ -36,13 +37,13 @@ int	cnt_col(int cnt_fd)
 			break ;
 		cnt++;
 	}
-	if (cnt < 1 || c != '\n' || c != '\0')
+	if (cnt < 1 || (c != '\n' && c != '\0'))
 		return (FAIL);
 	g_info.col_len = cnt;
 	return (SUCCESS);
 }
 
-int	fill_g_info(char *buf, int len)
+int	fill_info(char *buf, int len)
 {
 	int	i;
 
@@ -53,6 +54,7 @@ int	fill_g_info(char *buf, int len)
 	if (g_info.emt == g_info.fill || g_info.emt == g_info.block ||
 			g_info.block == g_info.fill)
 		return (FAIL);
+	g_info.rows = (char *)malloc(sizeof(char) * (len - 2));
 	while (++i < len - 3)
 		g_info.rows[i] = buf[i];
 	g_info.rows[i] = '\0';
@@ -82,7 +84,7 @@ int	dup_line(int rd_fd, char *line)
 	return (SUCCESS);
 }
 
-int	check_err(int cnt_fd, int rd_fd, t_map *map)
+int	check_err(int cnt_fd, int rd_fd, t_map **map)
 {
 	int		i;
 	char	buf[BUF_SIZE];
@@ -95,7 +97,7 @@ int	check_err(int cnt_fd, int rd_fd, t_map *map)
 		if (buf[i] <= 31 || buf[i] == 127)
 			return (FAIL);
 	}
-	if (i < 4 || cnt_col(cnt_fd) || fill_g_info(buf, i) || init_map(map, rd_fd))
+	if (i < 4 || cnt_col(cnt_fd) || fill_info(buf, i) || init_map(*map, rd_fd))
 		return (FAIL);
 	return (SUCCESS);
 }
