@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 20:47:53 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 19:52:35 by euhong           ###   ########.fr       */
+/*   Created: 2021/03/15 16:53:11 by euhong            #+#    #+#             */
+/*   Updated: 2021/03/15 18:07:52 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-void	putstr(char *str)
+typedef struct	s_info
 {
-	while (*str)
-		write(1, str++, 1);
-	write(1, "\n", 1);
-}
+	char		*rows;
+	int			row_len;
+	int			col_len;
+	char		emt;
+	char		block;
+	char		fill;
+}				t_info;
 
-void	print_map(t_map *map)
+typedef struct	s_xy
 {
-	int i;
+	int			max;
+	int			x;
+	int			y;
+}				t_xy;
 
-	i = -1;
-	while (map[++i].line)
-		putstr(map[i].line);
-}
-
-void	print_err(char *str)
+typedef struct	s_map
 {
-	while (*str)
-		write(2, str++, 1);
-}
+	char		*line;
+	int			*cp_line;
+}				t_map;
+
+#endif

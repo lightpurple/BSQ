@@ -6,27 +6,61 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:18:46 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/12 22:27:04 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/15 20:10:40 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
-t_info	info;
 
-void	bsq(int fd1, int fd2)
+t_info	info;
+void	bsq(int cnt_fd, int rd_fd)
 {
-	char	**map;
-	int		**copy_map;
+	t_map	*map;
 	t_xy	loc;
 
-	if (check_err(fd, map)) // 인자로 주어진 파일을 읽으면서 error체크와 동시에 map에 저장
+// 인자로 주어진 파일을 읽으면서 error체크와 동시에 map에 저장
+	if (check_err(cnt_fd, rd_fd, map))
 	{
-		print_err();
+		print_err(ERR_MSG);
+		return ;
 	}
-	map_cpy(copy_map, map); // map을 copy_map에 malloc하면서 cpy까지
-	change_map(copy_map, &info); //행,열 1번째를 1로 채우고 벽을 0을로 바꾸는거 까지
-	fill_map(copy_map, &loc); // 알고리즘거쳐서 x,y값, max값 구하기
-	finish_map(map, info, loc); // 원본 맵에 fill 채우기
+	map_cpy(map); // map을 copy_map에 malloc하면서 cpy까지
+	change_map(map); //행,열 1번째를 1로 채우고 벽을 0을로 바꾸는거 까지
+	loc = init_loc(map);
+	fill_map(map, &loc); // 알고리즘거쳐서 x,y값, max값 구하기
+	finish_map(map, loc); // 원본 맵에 fill 채우기
 	print_map(map);
-	dobby_is_free(copy_map, info); // copy_map, map free시키기
+	dobby_is_free(map); // copy_map, map free시키기
+}
+
+void	only_ac(char **av)
+{
+	int		cnt_fd;
+	int		rd_fd;
+	char	*f_name;
+
+	f_name = read_stdin();
+	cnt_fd = open(f_name, O_RDONLY);
+	rd_fd = open(f_name, O_RDONLY);
+	bsq(cnt_fd, rd_fd);
+	free(f_name);
+	close(cnt_fd);
+	close(rd_fd);
+}
+
+void	many_ac(int ac, char **av)
+{
+	int	i;
+	int	cnt_fd;
+	int	rd_fd;
+
+	i = 0;
+	while (++i < ac)
+	{
+		cnt_fd = open(av[i], O_RDONLY);
+		rd_fd = open(av[i], O_RDONLY);
+		bsq(cnt_fd, rd_fd);
+		close(cnt_fd);
+		close(rd_fd);
+	}
 }
