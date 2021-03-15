@@ -6,52 +6,81 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 18:03:49 by dookim           ###   ########.fr       */
+/*   Updated: 2021/03/15 20:54:41 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-void	change_first_row_col(t_map *map)
-{
-	while (*map.line != '\0')
-	{
-		if (*map.line == info.emt)
-			*map.cp_line = 1;
-		if (*map.line == info.block)
-			*map.cp_line = 0;
-		map.line++;
-		map.cp_line++;
-	}	
-	while (map.line != NULL)
-	{
-		if (*map.line == info.emt)
-			*map.cp_line = 1;
-		if (*map.line == info.block)
-			*map.cp_line = 0;
-		map++;
-	}
-}
+extern t_info	g_info;
 
-void	change_rest(t_map *map)
+int				init_map(t_map *map, int rd_fd)
 {
-	int idx;
+	int		i;
+	char	tmp;
 
-	while (*map.line  != NULL)
-	{
-		idx = 1;
-		while (map.cp_line[idx] != LINE_END)
+	i = -1;
+	map = (t_map *)malloc(sizeof(t_map) * (g_info.row_len + 1));
+	map[g_info.row_len].line = NULL;
+	while (read(rd_fd, &tmp, 1))
+		if (tmp == '\n')
+			break ;
+	while (++i < g_info.row_len)
+		if (dup_line(rd_fd, map[i].line))
 		{
-			if (*map.line == info.block)
-				*map.cp_line = 0;
-			idx++;
+			dobby_is_free(map);
+			return (FAIL);
 		}
-		map++;
-	}
+	return (SUCCESS);
 }
 
-void	change_map(t_map *map)
+t_xy			init_loc_search_x0(t_map *map)
 {
-	change_first_row_col(map);
-	change_rest(map);
+	t_xy	loc;
+	int		col;
+
+	loc.max = 0;
+	loc.x = g_info.col_len;
+	loc.y = g_info.row_len;
+	col = 0;
+	while (map->cp_line[col] != LINE_END)
+	{
+		if (map->cp_line[col] == 1)
+		{
+			loc.max = 1;
+			loc.y = 0;
+			loc.x = col;
+			break ;
+		}
+		col++;
+	}
+	return (loc);
+}
+
+t_xy			init_loc_search_0y(t_map *map, t_xy loc)
+{
+	int	row;
+
+	row = 0;
+	while (map[row].line != NULL)
+	{
+		if (*map[row].cp_line == 1 && row < loc.x)
+		{
+			loc.max = 1;
+			loc.y = row;
+			loc.x = 0;
+			break ;
+		}
+		row++;
+	}
+	return (loc);
+}
+
+t_xy			init_loc(t_map *map)
+{
+	t_xy	loc;
+
+	loc = init_loc_search_x0(map);
+	loc = init_loc_search_0y(map, loc);
+	return (loc);
 }

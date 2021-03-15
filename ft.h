@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:06:06 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 20:07:50 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/15 20:54:18 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void			change_map(t_map *map);
 void			fill_map(t_map *map, t_xy *loc);
 void			map_cpy(t_map *map);
 t_xy			init_loc(t_map *map);
+int				*ft_strdup_to_int(char *src);
 void			finish_map(t_map *map, t_xy loc);
+int				init_map(t_map *map, int rd_fd);
+int				dup_line(int rd_fd, char *line);
 void			print_err(char *str);
 void			print_map(t_map *map);
 int				ft_file_size(int fd);
@@ -41,7 +44,7 @@ void			ft_fail_malloc(char **map);
 int				ft_strlen(char *str);
 char			*ft_strcpy(char *dest, char *src);
 int				ft_is_c_in_str(char c, char *str);
-void			only_ac(char **av);
+void			only_ac(void);
 void			many_ac(int ac, char **av);
 
 #endif

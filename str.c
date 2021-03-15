@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   freeeeeeee.c                                       :+:      :+:    :+:   */
+/*   str.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/15 15:57:51 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 20:50:46 by euhong           ###   ########.fr       */
+/*   Created: 2021/03/15 20:43:39 by euhong            #+#    #+#             */
+/*   Updated: 2021/03/15 20:49:10 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,26 @@
 
 extern t_info g_info;
 
-void	dobby_is_free(t_map *map)
+int				ft_strlen(char *str)
 {
-	int i;
+	char	*str_st;
 
-	i = -1;
-	while (++i <= g_info.row_len)
-	{
-		free(map[i].line);
-		free(map[i].cp_line);
-	}
-	free(map);
+	str_st = str;
+	while (*str_st)
+		str_st++;
+	return (str_st - str);
+}
+
+int				*ft_strdup_to_int(char *src)
+{
+	int	index;
+	int	*dest;
+
+	index = -1;
+	if ((dest = (int *)malloc(sizeof(int) * (g_info.col_len + 1))) == NULL)
+		return (0);
+	while (src[++index])
+		dest[index] = (int)(src[index]);
+	dest[index] = LINE_END;
+	return (dest);
 }
