@@ -6,47 +6,52 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/12 21:26:45 by dookim           ###   ########.fr       */
+/*   Updated: 2021/03/15 18:03:49 by dookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-void			change_map(int **copy_map, t_info *info)
+void	change_first_row_col(t_map *map)
 {
-	
-}
-
-void	ft_fail_malloc(char **map)
-{
-	int idx;
-
-	idx = -1;
-	while (map[++idx] == NULL)
-		free(map[idx]);
-	free(map);
-}
-
-char	**init_malloc(char **map, int rows, int cols)
-{
-	int idx;
-
-	if((map = (char **)malloc(sizeof(char *) * (rows + 1))) == NULL)
-		return (NULL);
-	map[rows] = NULL;
-	idx = -1;
-	while (++idx < cols)
+	while (*map.line != '\0')
 	{
-		if((map[cols] = (char *)malloc(sizeof(char) * (cols + 1))) == NULL)
-		{
-			ft_fail_malloc(map);
-			return (NULL);
-		}
+		if (*map.line == info.emt)
+			*map.cp_line = 1;
+		if (*map.line == info.block)
+			*map.cp_line = 0;
+		map.line++;
+		map.cp_line++;
+	}	
+	while (map.line != NULL)
+	{
+		if (*map.line == info.emt)
+			*map.cp_line = 1;
+		if (*map.line == info.block)
+			*map.cp_line = 0;
+		map++;
 	}
-	return (map);
 }
 
-void			dobby_is_free(int **copy_map)
+void	change_rest(t_map *map)
 {
+	int idx;
 
+	while (*map.line  != NULL)
+	{
+		idx = 1;
+		while (map.cp_line[idx] != LINE_END)
+		{
+			if (*map.line == info.block)
+				*map.cp_line = 0;
+			idx++;
+		}
+		map++;
+	}
+}
+
+void	change_map(t_map *map)
+{
+	change_first_row_col(map);
+	change_rest(map);
 }

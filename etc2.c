@@ -6,13 +6,13 @@
 /*   By: dookim <dookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 21:06:52 by dookim            #+#    #+#             */
-/*   Updated: 2021/03/12 21:09:43 by dookim           ###   ########.fr       */
+/*   Updated: 2021/03/15 15:40:56 by dookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-int	ft_is_c_in_str(char c, char *str)
+int	is_c_in_str(char c, char *str)
 {
 	while (*str)
 	{

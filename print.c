@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 20:47:53 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/12 21:02:39 by dookim           ###   ########.fr       */
+/*   Updated: 2021/03/15 16:26:43 by dookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_putstr(char *str)
 	write(2, "\n", 1);
 }
 
-void	print_map(char **map)
+void	print_map(t_map *map)
 {
 	
 }

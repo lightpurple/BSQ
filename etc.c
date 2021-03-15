@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 20:40:13 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/12 20:59:39 by dookim           ###   ########.fr       */
+/*   Updated: 2021/03/15 20:21:26 by dookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 extern t_info info;
 
-void	finish_map(char **map, t_info info, t_xy loc)
+void	finish_map(t_map *map, t_xy loc)
 {
-	int x_idx;
-	int y_idx;
+	int row;
+	int col;
 	int y_init;
 
-	x_idx = loc.x - loc.max + 1;
-	y_idx = loc.y - loc.max + 1;
-	y_init = y_idx;
-	while (x_idx <= loc.x)
+	row = loc.x - loc.max + 1;
+	col = loc.y - loc.max + 1;
+	y_init = col;
+	while (row <= loc.x)
 	{
-		y_idx = y_init;
-		while (y_idx <= loc.y)
-			map[x_idx][y_idx++] = info.fill;
-		x_idx++;
+		col = y_init;
+		while (col <= loc.y)
+			map[row].line[col++] = info.fill;
+		row++;
 	}
 }
 
@@ -42,39 +42,42 @@ int	ft_strlen(char *str)
 	return (str_st - str);
 }
 
-char	*ft_strcpy(char *dest, char *src)
+int	*ft_strdup_to_int(char *src)
 {
-	int index;
+	int		index;
+	int	*dest;
 
 	index = 0;
-	while (src[index] != '\0')
-	{
-		dest[index] = src[index];
-		index++;
-	}
-	dest[index] = '\0';
+	if ((dest = (int *)malloc(sizeof(int) * (info.col_len + 1))) == NULL)
+		return (0);
+	while (src[index])
+		dest[index] = (int)(src[index++]);
+	dest[index] = LINE_END;
 	return (dest);
 }
 
-void	map_cpy(int **copy_map, char **map)
+void	map_cpy(t_map *map)
 {
-	int rows;
-	int cols;
+	int idx;
 
-	rows = ft_atoi(info.rows);
-	cols = ft_strlen(map[0]);
-	if ((copy_map = init_malloc(copy_map, rows, cols)) = NULL)
-		exit(1);
-	while (rows--)
-		ft_strcpy(copy_map[rows], map[rows]);
+	idx = 0;
+	while (map[idx].line != NULL)
+		map[idx].cp_line = ft_strdup_to_int(map[idx++].line);
 }
 
-int		ft_atoi(char *str)
+int		ft_atoi(void)
 {
 	int res;
+	int idx;
 
+	idx = 0;
+	while (info.rows[idx] >= '0' && info.rows[idx] <= '9')
+		idx++;
+	if (idx != ft_strlen(info.rows))
+		return (FAIL);
 	res = 0;
-	while (*str >= '0' && *str <= '9')
-		res = 10 * res + *str - '0';
-	return (res);
+	while (*info.rows >= '0' && *info.rows <= '9')
+		res = 10 * res + *info.rows++ - '0';
+	info.row_len = res;
+	return (SUCESS);
 }
