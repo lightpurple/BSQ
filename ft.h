@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:06:06 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 21:48:14 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/15 23:30:14 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@
 
 void			bsq(int fd1, int fd2);
 int				ft_atoi(void);
-int				check_err(int fd1, int fd2, t_map **map);
+t_map			*check_err(int fd1, int fd2, int *err);
 void			change_map(t_map *map);
 void			fill_map(t_map *map, t_xy *loc);
 void			map_cpy(t_map *map);
 t_xy			init_loc(t_map *map);
 int				*ft_strdup_to_int(char *src);
 void			finish_map(t_map *map, t_xy loc);
-int				init_map(t_map *map, int rd_fd);
+int				init_map(t_map **map, int rd_fd);
 int				dup_line(int rd_fd, char *line);
 void			print_err(char *str);
 void			print_map(t_map *map);

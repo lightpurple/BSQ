@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 20:54:41 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/15 23:35:21 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 extern t_info	g_info;
 
-int				init_map(t_map *map, int rd_fd)
+int				init_map(t_map **map, int rd_fd)
 {
 	int		i;
 	char	tmp;
 
 	i = -1;
-	map = (t_map *)malloc(sizeof(t_map) * (g_info.row_len + 1));
-	map[g_info.row_len].line = NULL;
+	*map = (t_map *)malloc(sizeof(t_map) * (g_info.row_len + 1));
+	(*map)[g_info.row_len].line = NULL;
 	while (read(rd_fd, &tmp, 1))
 		if (tmp == '\n')
 			break ;
 	while (++i < g_info.row_len)
-		if (dup_line(rd_fd, map[i].line))
+		if (dup_line(rd_fd, (*map)[i].line))
 		{
-			dobby_is_free(map);
+			dobby_is_free(*map);
 			return (FAIL);
 		}
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:43:39 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 20:49:10 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/15 23:38:46 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int				*ft_strdup_to_int(char *src)
 	if ((dest = (int *)malloc(sizeof(int) * (g_info.col_len + 1))) == NULL)
 		return (0);
 	while (src[++index])
-		dest[index] = (int)(src[index]);
+		dest[index] = src[index];
 	dest[index] = LINE_END;
 	return (dest);
 }

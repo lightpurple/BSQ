@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:18:46 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 21:50:57 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/15 23:31:29 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ t_info	g_info;
 
 void	bsq(int cnt_fd, int rd_fd)
 {
+	int		err;
 	t_map	*map;
 	t_xy	loc;
 
-	map = NULL;
+	map = check_err(cnt_fd, rd_fd, &err);
 	// 인자로 주어진 파일을 읽으면서 error체크와 동시에 map에 저장
-	if (check_err(cnt_fd, rd_fd, &map))
+	if (err)
 	{
 		print_err(ERR_MSG);
 		return ;

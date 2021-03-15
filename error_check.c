@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:32:18 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 21:48:33 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/15 23:32:01 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,26 @@ int	dup_line(int rd_fd, char *line)
 	return (SUCCESS);
 }
 
-int	check_err(int cnt_fd, int rd_fd, t_map **map)
+t_map	*check_err(int cnt_fd, int rd_fd, int *err)
 {
 	int		i;
 	char	buf[BUF_SIZE];
+	t_map	*map;
 
 	i = -1;
+	map = NULL;
+	*err = SUCCESS;
 	while (read(cnt_fd, &buf[++i], 1))
 	{
 		if (buf[i] == '\n')
 			break ;
 		if (buf[i] <= 31 || buf[i] == 127)
-			return (FAIL);
+			*err = FAIL;
 	}
-	if (i < 4 || cnt_col(cnt_fd) || fill_info(buf, i) || init_map(*map, rd_fd))
-		return (FAIL);
-	return (SUCCESS);
+	if (i < 4 || cnt_col(cnt_fd) || fill_info(buf, i) || init_map(&map, rd_fd))
+		*err = FAIL;
+	if (*err == FAIL)
+		return (NULL);
+	else
+		return (map);
 }
