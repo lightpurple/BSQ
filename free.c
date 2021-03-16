@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   freeeeeeee.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 15:57:51 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 20:50:46 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 17:40:08 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,16 @@ void	dobby_is_free(t_map *map)
 		free(map[i].cp_line);
 	}
 	free(map);
+	free(g_info.rows);
+}
+
+void	free_line(t_map *map, int idx)
+{
+	int i;
+
+	i = -1;
+	while (++i < idx)
+		free(map[i].line);
+	free(map);
+	free(g_info.rows);
 }

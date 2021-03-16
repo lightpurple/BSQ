@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:32:18 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 11:48:58 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 17:48:32 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,20 @@ int	fill_info(char *buf, int len)
 			g_info.block == g_info.fill)
 		return (FAIL);
 	g_info.rows = (char *)malloc(sizeof(char) * (len - 2));
+	if (g_info.rows == NULL)
+		return (FAIL);
 	while (++i < len - 3)
 		g_info.rows[i] = buf[i];
 	g_info.rows[i] = '\0';
 	if (ft_atoi())
+	{
+		free(g_info.rows);
 		return (FAIL);
+	}
 	return (SUCCESS);
 }
 
-t_map	*check_err(int cnt_fd, int rd_fd, int *err)
+t_map	*check_err(int cnt_fd, int rd_fd)
 {
 	int		i;
 	char	buf[BUF_SIZE];
@@ -71,18 +76,14 @@ t_map	*check_err(int cnt_fd, int rd_fd, int *err)
 
 	i = -1;
 	map = NULL;
-	*err = SUCCESS;
 	while (read(cnt_fd, &buf[++i], 1))
 	{
 		if (buf[i] == '\n')
 			break ;
 		if (buf[i] <= 31 || buf[i] == 127)
-			*err = FAIL;
+			return (NULL);
 	}
 	if (i < 4 || cnt_col(cnt_fd) || fill_info(buf, i) || init_map(&map, rd_fd))
-		*err = FAIL;
-	if (*err == FAIL)
 		return (NULL);
-	else
-		return (map);
+	return (map);
 }

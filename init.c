@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 15:16:14 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 17:23:00 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,20 @@ int	dup_line(int rd_fd, char *line)
 
 	i = -1;
 	line = (char *)malloc(sizeof(char) * (g_info.col_len + 1));
+	if (line == NULL)
+		return (FAIL);
 	while (read(rd_fd, &line[++i], 1))
 	{
 		if (check_deserve(line[i]))
+		{
+			free(line);
 			return (FAIL);
+		}
 		if (i == g_info.col_len)
 		{
 			if (line[i] == '\n' || line[i] == '\0')
 				break ;
+			free(line);
 			return (FAIL);
 		}
 	}
@@ -42,14 +48,18 @@ int				init_map(t_map **map, int rd_fd)
 
 	i = -1;
 	*map = (t_map *)malloc(sizeof(t_map) * (g_info.row_len + 1));
-	map[g_info.row_len]->line = NULL;
+	if (*map == NULL)
+		return (FAIL);
+	while (++i < g_info.row_len)
+		map[g_info.row_len]->line = NULL;
 	while (read(rd_fd, &tmp, 1))
 		if (tmp == '\n')
 			break ;
+	i = -1;
 	while (++i < g_info.row_len)
 		if (dup_line(rd_fd, map[i]->line))
 		{
-			dobby_is_free(*map);
+			free_line(*map, i);
 			return (FAIL);
 		}
 	return (SUCCESS);

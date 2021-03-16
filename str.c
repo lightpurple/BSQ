@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:43:39 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 23:38:46 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 18:10:18 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ int				ft_strlen(char *str)
 	while (*str_st)
 		str_st++;
 	return (str_st - str);
+}
+
+void			ft_strcat(char **dest, char *src)
+{
+	int i;
+	int j;
+
+	i = ft_strlen(*dest);
+	j = 0;
+	while (src[j])
+		(*dest)[i++] = src[j++];
+	(*dest)[i] = '\0';
 }
 
 int				*ft_strdup_to_int(char *src)

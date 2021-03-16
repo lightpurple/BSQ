@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:06:06 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 11:49:11 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 18:11:03 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "struct.h"
-# define BUF_SIZE 30
+# define BUF_SIZE 50
 # define SUCCESS 0
 # define FAIL 1
 # define LINE_END -1
@@ -26,7 +26,8 @@
 void			bsq(int fd1, int fd2);
 int				ft_atoi(void);
 int				check_deserve(char c);
-t_map			*check_err(int fd1, int fd2, int *err);
+void			free_line(t_map *map, int idx);
+t_map			*check_err(int fd1, int fd2);
 void			change_map(t_map *map);
 void			fill_map(t_map *map, t_xy *loc);
 void			map_cpy(t_map *map);
@@ -43,7 +44,7 @@ void			dobby_is_free(t_map *map);
 void			init_malloc(char **map, int rows, int cols);
 void			ft_fail_malloc(char **map);
 int				ft_strlen(char *str);
-char			*ft_strcpy(char *dest, char *src);
+void			ft_strcat(char **dest, char *src);
 int				ft_is_c_in_str(char c, char *str);
 void			only_ac(void);
 void			many_ac(int ac, char **av);

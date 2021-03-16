@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 20:40:13 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 21:39:13 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 17:35:19 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,14 @@ int				ft_atoi(void)
 	if (idx != ft_strlen(g_info.rows))
 		return (FAIL);
 	res = 0;
-	while (*g_info.rows >= '0' && *g_info.rows <= '9')
-		res = 10 * res + *g_info.rows++ - '0';
+	idx = 0;
+	while (g_info.rows[idx])
+	{
+		if (res < 0)
+			return (FAIL);
+		res = 10 * res + g_info.rows[idx] - '0';
+		idx++;
+	}
 	g_info.row_len = res;
 	return (SUCCESS);
 }
