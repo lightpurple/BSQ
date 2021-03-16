@@ -6,13 +6,14 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:06:06 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 18:11:03 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 20:58:59 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_H
 # define FT_H
 
+# include <stdio.h>//얘 지우기
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -35,7 +36,7 @@ t_xy			init_loc(t_map *map);
 int				*ft_strdup_to_int(char *src);
 void			finish_map(t_map *map, t_xy loc);
 int				init_map(t_map **map, int rd_fd);
-int				dup_line(int rd_fd, char *line);
+int				dup_line(int rd_fd, char **line);
 void			print_err(char *str);
 void			print_map(t_map *map);
 int				ft_file_size(int fd);
