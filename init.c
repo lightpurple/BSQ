@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 21:00:40 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 21:45:15 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				init_map(t_map **map, int rd_fd)
 	*map = (t_map *)malloc(sizeof(t_map) * (g_info.row_len + 1));
 	if (*map == NULL)
 		return (FAIL);
-	while (++i < g_info.row_len)
+	while (++i <= g_info.row_len)
 		((*map) + i)->line = NULL;
 	while (read(rd_fd, &tmp, 1))
 		if (tmp == '\n')
