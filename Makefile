@@ -1,12 +1,14 @@
+NAME=BSQ
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror
-SRCS=$(wildcard *.c)
+FILE=algorithm bsq change error_check etc etc2 free \
+	 init input main print str
+SRCS=$(addsuffix .c, $(FILE))
 OBJS=$(SRCS:.c=.o)
-TARGET=BSQ
 
-all : $(TARGET)
+all : $(NAME)
 
-$(TARGET) : $(OBJS)
+$(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 %.o : %.c
@@ -15,5 +17,9 @@ $(TARGET) : $(OBJS)
 clean :
 	$(RM) $(OBJS)
 
-fclean :
-	$(RM) $(TARGET) $(OBJS)
+fclean : clean
+	$(RM) $(NAME)
+
+re : fclean all
+
+.PHONY : all clean fclean re

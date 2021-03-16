@@ -6,13 +6,34 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 23:35:21 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 15:16:14 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
 extern t_info	g_info;
+
+int	dup_line(int rd_fd, char *line)
+{
+	int	i;
+
+	i = -1;
+	line = (char *)malloc(sizeof(char) * (g_info.col_len + 1));
+	while (read(rd_fd, &line[++i], 1))
+	{
+		if (check_deserve(line[i]))
+			return (FAIL);
+		if (i == g_info.col_len)
+		{
+			if (line[i] == '\n' || line[i] == '\0')
+				break ;
+			return (FAIL);
+		}
+	}
+	line[i] = '\0';
+	return (SUCCESS);
+}
 
 int				init_map(t_map **map, int rd_fd)
 {
@@ -21,12 +42,12 @@ int				init_map(t_map **map, int rd_fd)
 
 	i = -1;
 	*map = (t_map *)malloc(sizeof(t_map) * (g_info.row_len + 1));
-	(*map)[g_info.row_len].line = NULL;
+	map[g_info.row_len]->line = NULL;
 	while (read(rd_fd, &tmp, 1))
 		if (tmp == '\n')
 			break ;
 	while (++i < g_info.row_len)
-		if (dup_line(rd_fd, (*map)[i].line))
+		if (dup_line(rd_fd, map[i]->line))
 		{
 			dobby_is_free(*map);
 			return (FAIL);

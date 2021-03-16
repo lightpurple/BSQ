@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:32:18 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 23:32:01 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 11:48:58 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,6 @@ int	fill_info(char *buf, int len)
 	g_info.rows[i] = '\0';
 	if (ft_atoi())
 		return (FAIL);
-	return (SUCCESS);
-}
-
-int	dup_line(int rd_fd, char *line)
-{
-	int	i;
-
-	i = -1;
-	line = (char *)malloc(sizeof(char) * (g_info.col_len + 1));
-	while (read(rd_fd, &line[++i], 1))
-	{
-		if (check_deserve(line[i]))
-			return (FAIL);
-		if (i == g_info.col_len)
-		{
-			if (line[i] == '\n' || line[i] == '\0')
-				break ;
-			return (FAIL);
-		}
-	}
-	line[i] = '\0';
 	return (SUCCESS);
 }
 
