@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 22:32:29 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 02:15:26 by dookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_xy			init_loc_search_0y(t_map *map, t_xy loc)
 	row = 0;
 	while (map[row].line != NULL)
 	{
-		if (*map[row].cp_line == 1 && row < loc.x)
+		if (*map[row].cp_line == 1 && row < loc.y)
 		{
 			loc.max = 1;
 			loc.y = row;

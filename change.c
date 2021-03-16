@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:39:00 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 20:48:14 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 01:46:38 by dookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,44 @@ extern t_info	g_info;
 
 void			change_first_row_col(t_map *map)
 {
-	while (map->line != NULL)
+	int idx;
+
+	idx = 0;
+	while (map->line[idx] != '\0')
 	{
-		if (*map->line == g_info.emt)
-			*map->cp_line = 1;
-		if (*map->line == g_info.block)
-			*map->cp_line = 0;
-		map->line++;
-		map->cp_line++;
+		if (map->line[idx] == g_info.emt)
+			map->cp_line[idx] = 1;
+		if (map->line[idx] == g_info.block)
+			map->cp_line[idx] = 0;
+		idx++;;
 	}
-	while (map->line != NULL)
+	idx = 0;
+	while (map[idx].line != NULL)
 	{
-		if (*map->line == g_info.emt)
-			*map->cp_line = 1;
-		if (*map->line == g_info.block)
-			*map->cp_line = 0;
-		map++;
+		if (*map[idx].line == g_info.emt)
+			*map[idx].cp_line = 1;
+		if (*map[idx].line == g_info.block)
+			*map[idx].cp_line = 0;
+		idx++;
 	}
 }
 
 void			change_rest(t_map *map)
 {
-	int	idx;
+	int	row;
+	int	col;
 
-	while (map->line != NULL)
+	row = 1;
+	while (map[row].line != NULL)
 	{
-		idx = 1;
-		while (map->cp_line[idx] != LINE_END)
+		col = 1;
+		while (map[row].cp_line[col] != LINE_END)
 		{
-			if (*map->line == g_info.block)
-				*map->cp_line = 0;
-			idx++;
+			if (map[row].line[col] == g_info.block)
+				map[row].cp_line[col] = 0;
+			col++;
 		}
-		map++;
+		row++;
 	}
 }
 
