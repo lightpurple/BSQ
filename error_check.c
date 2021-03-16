@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:32:18 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 19:56:02 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 22:30:13 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ extern t_info g_info; // malloc하기
 int	check_deserve(char c)
 {
 	if (c != g_info.emt && c != g_info.block && c != g_info.fill &&
-			c != '\n' && c != '\0')
+			c != '\n')
 		return (FAIL);
 	return (SUCCESS);
 }
@@ -33,11 +33,11 @@ int	cnt_col(int cnt_fd)
 	cnt = 0;
 	while (read(cnt_fd, &c, 1))
 	{
-		if (c == '\n' || c == '\0')
+		if (c == '\n')
 			break ;
 		cnt++;
 	}
-	if (cnt < 1 || (c != '\n' && c != '\0'))
+	if (cnt < 1 || (c != '\n'))
 		return (FAIL);
 	g_info.col_len = cnt;
 	return (SUCCESS);
@@ -80,7 +80,7 @@ t_map	*check_err(int cnt_fd, int rd_fd)
 	{
 		if (buf[i] == '\n')
 			break ;
-		if (buf[i] <= 31 || buf[i] == 127)
+		if (buf[i] <= 31 || buf[i] == 127 || i + 1 >= BUF_SIZE)
 			return (NULL);
 	}
 	if (i < 4 || cnt_col(cnt_fd) || fill_info(buf, i) || init_map(&map, rd_fd))

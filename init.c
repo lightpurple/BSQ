@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 21:45:15 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/16 22:32:29 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	dup_line(int rd_fd, char **line)
 		}
 		if (i == g_info.col_len)
 		{
-			if ((*line)[i] == '\n' || (*line)[i] == '\0')
+			if ((*line)[i] == '\n')
 				break ;
 			free(line);
 			return (FAIL);
