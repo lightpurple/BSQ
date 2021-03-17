@@ -6,13 +6,14 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:43:39 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 21:43:24 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/18 00:16:03 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
 extern t_info	g_info;
+extern int		g_flag;
 
 int				ft_nl_len(char *str)
 {
@@ -38,33 +39,25 @@ int				ft_strlen(char *str)
 	return (i);
 }
 
-void			ft_strcpy(char **copy, char *line, int idx)
+int				ft_strcpy(char **copy, char *line)
 {
-	int	i;
-	int	j;
-	int	tmp;
-	int	cnt;
+	int			i;
+	static int	cur = 0;
 
-	i = 0;
-	cnt = -1;
-	j = -1;
-	if (i == 0)
-		while (line[i] != '\n')
-			i++;
-	while (1)
+	if (g_flag == 2)
 	{
-		tmp = i + 1;
-		while (line[++i] != '\n')
-			;
-		cnt++;
-		if (cnt == idx)
-			break ;
+		cur = 0;
+		g_flag = 0;
 	}
-	while (++j < i - tmp)
-	{
-		(*copy)[j] = line[tmp + j];
-	}
-	(*copy)[j] = '\0';
+	i = -1;
+	if (cur == 0)
+		while (line[cur] != '\n')
+			cur++;
+	while (line[++cur] != '\n')
+		(*copy)[++i] = line[cur];
+	if (i != -1)
+		(*copy)[++i] = '\0';
+	return (i);
 }
 
 void			ft_strncat(char **dest, char *src, int n)

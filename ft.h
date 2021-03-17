@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:06:06 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 21:13:19 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/18 00:12:35 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			free_cp_line(t_map *map, int idx);
 void			only_ac(void);
 void			many_ac(int ac, char **av);
 int				ft_nl_len(char *str);
-void			ft_strcpy(char **copy, char *line, int idx);
+int				ft_strcpy(char **copy, char *line);
 int				ft_strlen(char *str);
 void			ft_strncat(char **dest, char *src, int n);
 void			fill_map(t_map *map, t_xy *loc);

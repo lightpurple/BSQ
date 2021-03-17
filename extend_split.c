@@ -6,13 +6,14 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 21:06:58 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 21:43:42 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/18 00:15:51 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
 extern t_info	g_info;
+extern int		g_flag;
 
 char			*ft_extend(char *line, int line_len, char *buf, int b_size)
 {
@@ -29,27 +30,25 @@ char			*ft_extend(char *line, int line_len, char *buf, int b_size)
 	return (new_line);
 }
 
-int				ft_split_size(char *line, int idx)
+int				ft_split_size(char *line)
 {
-	int	i;
-	int	tmp;
-	int	cnt;
+	static int	cur = 0;
+	int			cmp;
 
-	i = 0;
-	cnt = -1;
-	if (i == 0)
-		while (line[i] != '\n')
-			i++;
-	while (1)
+	if (g_flag == 1)
 	{
-		tmp = i;
-		while (line[++i] != '\n')
-			;
-		cnt++;
-		if (cnt == idx)
-			break ;
+		cur = 0;
+		g_flag++;
 	}
-	return (i - tmp);
+	if (cur == 0)
+		while (line[cur] != '\n')
+			cur++;
+	cmp = cur;
+	while (line[++cur] != '\n')
+		;
+	if (cmp != cur)
+		return (cur - cmp);
+	return (0);
 }
 
 t_map			*ft_split(char *line)
@@ -64,7 +63,7 @@ t_map			*ft_split(char *line)
 		return (NULL);
 	}
 	while (++i < g_info.row_len)
-		if (!(map[i].line = (char *)malloc(ft_split_size(line, i))))
+		if (!(map[i].line = (char *)malloc(ft_split_size(line))))
 		{
 			free_line(map, i);
 			return (NULL);
@@ -73,7 +72,7 @@ t_map			*ft_split(char *line)
 	i = 0;
 	while (i < g_info.row_len)
 	{
-		ft_strcpy(&map[i].line, line, i);
+		ft_strcpy(&map[i].line, line);
 		i++;
 	}
 	free(line);

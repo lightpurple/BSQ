@@ -6,13 +6,14 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:18:46 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 21:43:04 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/18 00:07:54 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
 t_info	g_info;
+int		g_flag = 0;
 
 void	only_ac(void)
 {
@@ -44,6 +45,7 @@ void	many_ac(int ac, char **av)
 		}
 		bsq(map);
 		close(fd);
+		g_flag++;
 	}
 }
 
