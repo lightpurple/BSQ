@@ -6,32 +6,19 @@
 /*   By: dookim <dookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:02:30 by dookim            #+#    #+#             */
-/*   Updated: 2021/03/17 13:58:45 by dookim           ###   ########.fr       */
+/*   Updated: 2021/03/17 18:32:43 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 #include "struct.h"
 
-extern t_info g_info;
+extern t_info	g_info;
 
-int	is_in_info(char *line)
+int				map_col_check(t_map *map)
 {
-	int idx;
-
-	idx = -1;
-	while (line[++idx])
-		if (line[idx] != g_info.fill &&
-			line[idx] != g_info.block &&
-			line[idx] != g_info.emt)
-			return (FAIL);
-	return (SUCCESS);
-}
-
-int	map_col_check(t_map *map)
-{
-	int idx;
-	int col_len;
+	int	idx;
+	int	col_len;
 
 	idx = -1;
 	while (map[++idx].line != NULL)
@@ -46,9 +33,9 @@ int	map_col_check(t_map *map)
 	return (SUCCESS);
 }
 
-int	map_row_check(t_map *map)
+int				map_row_check(t_map *map)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (map[count].line)
@@ -61,7 +48,7 @@ int	map_row_check(t_map *map)
 	return (SUCCESS);
 }
 
-int	map_error_check(t_map *map)
+int				map_error_check(t_map *map)
 {
 	if (map_col_check(map))
 		return (FAIL);

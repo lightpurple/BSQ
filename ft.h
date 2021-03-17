@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:06:06 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 17:48:15 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 18:26:54 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,23 @@ void			free_line(t_map *map, int idx);
 void			free_cp_line(t_map *map, int idx);
 void			only_ac(void);
 void			many_ac(int ac, char **av);
+int				ft_nl_len(char *str);
+int				ft_strcpy(char **copy, char *line);
 int				ft_strlen(char *str);
 void			ft_strcat(char **dest, char *src);
 void			fill_map(t_map *map, t_xy *loc);
 void			finish_map(t_map *map, t_xy loc);
 void			print_err(char *str);
 void			print_map(t_map *map);
-
-
-int				ft_atoi(void);
-int				check_deserve(char c);
 int				fill_info(char *line);
-void			change_map(t_map *map);
-void			map_cpy(t_map *map);
-t_xy			init_loc(t_map *map);
+int				map_cpy(t_map *map);
 int				*ft_strdup_to_int(char *src);
-void			init_malloc(char **map, int rows, int cols);
-void			ft_fail_malloc(char **map);
-int				ft_is_c_in_str(char c, char *str);
+void			change_map(t_map *map);
+t_xy			init_loc(t_map *map);
+int				ft_str_is_printable(char *str);
+int				linefeed_error_check(char *line);
+int				map_error_check(t_map *map);
+int				is_in_info(char *line);
+int				is_c_in_str(char c, char *str);
 
 #endif

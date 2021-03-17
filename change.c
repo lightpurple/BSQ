@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:39:00 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 01:46:38 by dookim           ###   ########.fr       */
+/*   Updated: 2021/03/17 18:33:23 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern t_info	g_info;
 
 void			change_first_row_col(t_map *map)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
 	while (map->line[idx] != '\0')
@@ -25,7 +25,8 @@ void			change_first_row_col(t_map *map)
 			map->cp_line[idx] = 1;
 		if (map->line[idx] == g_info.block)
 			map->cp_line[idx] = 0;
-		idx++;;
+		idx++;
+		;
 	}
 	idx = 0;
 	while (map[idx].line != NULL)

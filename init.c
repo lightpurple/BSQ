@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 02:15:26 by dookim           ###   ########.fr       */
+/*   Updated: 2021/03/17 18:29:13 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,40 @@
 
 extern t_info	g_info;
 
-int	dup_line(int rd_fd, char **line)
+int				map_cpy(t_map *map)
+{
+	int	idx;
+
+	idx = -1;
+	while (map[++idx].line != NULL)
+		if (!(map[idx].cp_line = ft_strdup_to_int(map[idx].line)))
+		{
+			free_cp_line(map, idx);
+			return (FAIL);
+		}
+	return (SUCCESS);
+}
+
+int				init_rows(char *line)
 {
 	int	i;
 
 	i = -1;
-	*line = (char *)malloc(sizeof(char) * (g_info.col_len + 1));
-	if (*line == NULL)
+	if (line == NULL)
 		return (FAIL);
-	while (read(rd_fd, &(*line)[++i], 1))
+	if (!(g_info.rows = (char *)malloc(ft_nl_len(line) + 1)))
 	{
-		if (check_deserve((*line)[i]))
-		{
-			free(line);
-			return (FAIL);
-		}
-		if (i == g_info.col_len)
-		{
-			if ((*line)[i] == '\n')
-				break ;
-			free(line);
-			return (FAIL);
-		}
-	}
-	(*line)[i] = '\0';
-	return (SUCCESS);
-}
-
-int				init_map(t_map **map, int rd_fd)
-{
-	int		i;
-	char	tmp;
-
-	i = -1;
-	*map = (t_map *)malloc(sizeof(t_map) * (g_info.row_len + 1));
-	if (*map == NULL)
+		free(line);
 		return (FAIL);
-	while (++i <= g_info.row_len)
-		((*map) + i)->line = NULL;
-	while (read(rd_fd, &tmp, 1))
-		if (tmp == '\n')
-			break ;
-	i = -1;
-	while (++i < g_info.row_len)
-		if (dup_line(rd_fd, &((*map) + i)->line))
-		{
-			free_line(*map, i);
-			return (FAIL);
-		}
+	}
+	while (line[++i] != '\n')
+		g_info.rows[i] = line[i];
+	g_info.rows[i] = '\0';
+	if (fill_info(line))
+	{
+		free(line);
+		return (FAIL);
+	}
 	return (SUCCESS);
 }
 
