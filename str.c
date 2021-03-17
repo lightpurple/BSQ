@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:43:39 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 18:22:48 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 18:42:03 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ int				ft_strlen(char *str)
 int				ft_strcpy(char **copy, char *line)
 {
 	int			i;
-	static int	cur;
+	static int	cur = 0;
 
-	cur = 0;
 	i = -1;
 	if (cur == 0)
 		while (line[cur] != '\n')

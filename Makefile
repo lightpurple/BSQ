@@ -1,8 +1,8 @@
 NAME=BSQ
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror
-FILE=algorithm bsq change error_check etc etc2 free \
-	 init input main print str
+FILE=bsq change dp extend_split first_check free \
+	 init is_series main map_check print str
 SRCS=$(addsuffix .c, $(FILE))
 OBJS=$(SRCS:.c=.o)
 
