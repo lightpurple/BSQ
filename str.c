@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:43:39 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 21:25:50 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 21:43:24 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int				ft_nl_len(char *str)
 
 int				ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str == NULL)
@@ -40,10 +40,10 @@ int				ft_strlen(char *str)
 
 void			ft_strcpy(char **copy, char *line, int idx)
 {
-	int			i;
-	int			j;
-	int			tmp;
-	int			cnt;
+	int	i;
+	int	j;
+	int	tmp;
+	int	cnt;
 
 	i = 0;
 	cnt = -1;
@@ -58,7 +58,7 @@ void			ft_strcpy(char **copy, char *line, int idx)
 			;
 		cnt++;
 		if (cnt == idx)
-			break;
+			break ;
 	}
 	while (++j < i - tmp)
 	{

@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:18:46 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 21:37:41 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 21:43:04 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,12 @@ void	bsq(t_map *map)
 	loc.max = 0;
 	loc.x = 0;
 	loc.y = 0;
-	// map을 copy_map에 malloc하면서 cpy까지
 	if (map_cpy(map))
 		return ;
-	change_map(map); //행,열 1번째를 1로 채우고 벽을 0을로 바꾸는거 까지
+	change_map(map);
 	loc = init_loc(map);
-	fill_map(map, &loc);  // 알고리즘거쳐서 x,y값, max값 구하기
-	finish_map(map, loc); // 원본 맵에 fill 채우기
+	fill_map(map, &loc);
+	finish_map(map, loc);
 	print_map(map);
-	dobby_is_free(map); // copy_map, map free시키기
+	dobby_is_free(map);
 }

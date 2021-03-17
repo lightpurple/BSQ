@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 21:06:58 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 21:13:31 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 21:43:42 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ char			*ft_extend(char *line, int line_len, char *buf, int b_size)
 
 int				ft_split_size(char *line, int idx)
 {
-	int			i;
-	int			tmp;
-	int			cnt;
+	int	i;
+	int	tmp;
+	int	cnt;
 
 	i = 0;
 	cnt = -1;
@@ -47,7 +47,7 @@ int				ft_split_size(char *line, int idx)
 			;
 		cnt++;
 		if (cnt == idx)
-			break;
+			break ;
 	}
 	return (i - tmp);
 }
