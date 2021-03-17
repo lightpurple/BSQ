@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:53:11 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 18:07:52 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 10:49:08 by dookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef struct	s_info
 {
-	char		*rows;
+	char		*rows
 	int			row_len;
 	int			col_len;
 	char		emt;
