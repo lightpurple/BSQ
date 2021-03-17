@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:43:39 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 20:37:04 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 21:25:50 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,33 @@ int				ft_strlen(char *str)
 	return (i);
 }
 
-int				ft_strcpy(char **copy, char *line)
+void			ft_strcpy(char **copy, char *line, int idx)
 {
 	int			i;
-	static int	cur = 0;
+	int			j;
+	int			tmp;
+	int			cnt;
 
-	i = -1;
-	if (cur == 0)
-		while (line[cur] != '\n')
-			cur++;
-	while (line[++cur] != '\n')
-		(*copy)[++i] = line[cur];
-	if (i != -1)
-		(*copy)[++i] = '\0';
-	return (i);
+	i = 0;
+	cnt = -1;
+	j = -1;
+	if (i == 0)
+		while (line[i] != '\n')
+			i++;
+	while (1)
+	{
+		tmp = i + 1;
+		while (line[++i] != '\n')
+			;
+		cnt++;
+		if (cnt == idx)
+			break;
+	}
+	while (++j < i - tmp)
+	{
+		(*copy)[j] = line[tmp + j];
+	}
+	(*copy)[j] = '\0';
 }
 
 void			ft_strncat(char **dest, char *src, int n)

@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 21:06:58 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 21:02:52 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 21:13:31 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ t_map			*ft_split(char *line)
 	i = 0;
 	while (i < g_info.row_len)
 	{
-		if (ft_strcpy(&map[i].line, line) == -1)
-			continue ;
+		ft_strcpy(&map[i].line, line, i);
 		i++;
 	}
 	free(line);
