@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 18:29:13 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 19:54:02 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ int				map_cpy(t_map *map)
 {
 	int	idx;
 
+	idx = 0;
+	while (map->line[idx])
+		idx++;
+	g_info.col_len = idx;
 	idx = -1;
 	while (map[++idx].line != NULL)
 		if (!(map[idx].cp_line = ft_strdup_to_int(map[idx].line)))

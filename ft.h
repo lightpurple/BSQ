@@ -6,14 +6,13 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:06:06 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 18:26:54 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 19:56:41 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_H
 # define FT_H
 
-# include <stdio.h>//얘 지우기
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>

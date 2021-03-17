@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:18:46 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 18:35:18 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 19:37:18 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ t_map	*read_map(int fd)
 		free(line);
 		return (NULL);
 	}
-	// line마지막 \0인지 확인, 중간에 빈 행있는지
 	if (init_rows(line) || !(map = ft_split(line)))
 		return (NULL);
 	return (map);
