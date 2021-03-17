@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:56:52 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 19:54:02 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/18 02:10:25 by dookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				map_cpy(t_map *map)
 	return (SUCCESS);
 }
 
-int				init_rows(char *line)
+int				init_rows(char *line, int total)
 {
 	int	i;
 
@@ -47,7 +47,7 @@ int				init_rows(char *line)
 	while (line[++i] != '\n')
 		g_info.rows[i] = line[i];
 	g_info.rows[i] = '\0';
-	if (fill_info(line))
+	if (fill_info(line, total))
 	{
 		free(line);
 		return (FAIL);

@@ -6,7 +6,7 @@
 /*   By: dookim <dookim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 10:43:50 by dookim            #+#    #+#             */
-/*   Updated: 2021/03/17 18:32:51 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/18 02:21:03 by dookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_info	g_info;
 
-int				linefeed_error_check(char *line)
+int				linefeed_error_check(char *line, int total)
 {
 	int	idx;
 	int	count;
@@ -32,7 +32,7 @@ int				linefeed_error_check(char *line)
 	idx = -1;
 	while (line[++idx])
 	{
-		if ((idx != ft_strlen(line)) &&
+		if ((idx != total) &&
 			(line[idx] == '\n' && line[idx + 1] == '\n'))
 		{
 			free(g_info.rows);
@@ -65,7 +65,7 @@ int				first_error_check(void)
 	return (SUCCESS);
 }
 
-int				fill_info(char *line)
+int				fill_info(char *line, int total)
 {
 	int	idx;
 	int	len;
@@ -82,7 +82,7 @@ int				fill_info(char *line)
 		free(g_info.rows);
 		return (FAIL);
 	}
-	if (linefeed_error_check(line))
+	if (linefeed_error_check(line, total))
 		return (FAIL);
 	g_info.emt = g_info.rows[len - 3];
 	g_info.block = g_info.rows[len - 2];

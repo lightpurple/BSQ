@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:18:46 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/18 00:07:54 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/18 02:20:42 by dookim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_map	*read_map(int fd)
 	buf[0] = '\0';
 	while ((size = read(fd, buf, BUF_SIZE - 1)) > 0)
 	{
-		buf[BUF_SIZE - 1] = '\0';
+		buf[size] = '\0';
 		if (!(line = ft_extend(line, total, buf, size)))
 			return (NULL);
 		total += size;
@@ -72,7 +72,7 @@ t_map	*read_map(int fd)
 		free(line);
 		return (NULL);
 	}
-	if (init_rows(line) || !(map = ft_split(line)))
+	if (init_rows(line, total) || !(map = ft_split(line)))
 		return (NULL);
 	return (map);
 }
