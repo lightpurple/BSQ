@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 20:43:39 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 19:55:01 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 20:37:04 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int				ft_nl_len(char *str)
 	int	i;
 
 	i = 0;
+	if (str == NULL)
+		return (0);
 	while (str[i] != '\n')
 		i++;
 	return (i);
@@ -26,12 +28,14 @@ int				ft_nl_len(char *str)
 
 int				ft_strlen(char *str)
 {
-	char	*str_st;
+	int i;
 
-	str_st = str;
-	while (*str_st)
-		str_st++;
-	return (str_st - str);
+	i = 0;
+	if (str == NULL)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
 }
 
 int				ft_strcpy(char **copy, char *line)
@@ -50,14 +54,14 @@ int				ft_strcpy(char **copy, char *line)
 	return (i);
 }
 
-void			ft_strcat(char **dest, char *src)
+void			ft_strncat(char **dest, char *src, int n)
 {
 	int	i;
 	int	j;
 
 	i = ft_strlen(*dest);
 	j = 0;
-	while (src[j])
+	while (j < n && src[j])
 		(*dest)[i++] = src[j++];
 	(*dest)[i] = '\0';
 }

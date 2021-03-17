@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:07:07 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 20:18:45 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 20:13:01 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,9 @@ int	main(int argc, char *argv[])
 		only_ac();
 	else
 		many_ac(argc, argv);
+	while (1)
+	{
+		;
+	}
 	return (0);
 }

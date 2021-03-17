@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:18:46 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 19:37:18 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 20:30:39 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ t_map	*read_map(int fd)
 
 	line = NULL;
 	total = 0;
+	buf[0] = '\0';
 	while ((size = read(fd, buf, BUF_SIZE - 1)) > 0)
 	{
 		buf[BUF_SIZE - 1] = '\0';
-		if (!(line = ft_extend(line, total, buf)))
+		if (!(line = ft_extend(line, total, buf, size)))
 			return (NULL);
 		total += size;
 	}

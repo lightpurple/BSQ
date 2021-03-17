@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 15:57:51 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 18:27:52 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 20:42:48 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void			dobby_is_free(t_map *map)
 	while (++i <= g_info.row_len)
 	{
 		free(map[i].line);
-		free(map[i].cp_line);
+		if (i != g_info.row_len)
+			free(map[i].cp_line);
 	}
 	free(map);
 	free(g_info.rows);

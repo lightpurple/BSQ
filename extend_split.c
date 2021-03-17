@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   extend_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 21:06:58 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/17 18:23:17 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 20:34:11 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 extern t_info	g_info;
 
-char			*ft_extend(char *line, int line_len, char *buf)
+char			*ft_extend(char *line, int line_len, char *buf, int b_size)
 {
 	char	*new_line;
 
-	if (!(new_line = (char *)malloc(line_len + ft_strlen(buf) + 1)))
+	if (!(new_line = (char *)malloc(line_len + b_size + 1)))
 		return (NULL);
 	*new_line = '\0';
 	if (line != NULL)
-		ft_strcat(&new_line, line);
-	ft_strcat(&new_line, buf);
+		ft_strncat(&new_line, line, line_len);
+	ft_strncat(&new_line, buf, b_size);
 	if (line != NULL)
 		free(line);
 	return (new_line);
