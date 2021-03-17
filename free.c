@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 15:57:51 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 17:40:08 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 17:42:48 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,21 @@ void	free_line(t_map *map, int idx)
 	i = -1;
 	while (++i < idx)
 		free(map[i].line);
+	free(map);
+	free(g_info.rows);
+}
+
+void	free_cp_line(t_map *map, int idx)
+{
+	int i;
+	int j;
+
+	i = -1;
+	j = -1;
+	while (++i < idx)
+		free(map[i].cp_line);
+	while (++j <= g_info.row_len) 
+		free(map[j].line);
 	free(map);
 	free(g_info.rows);
 }
