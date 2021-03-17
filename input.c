@@ -6,59 +6,119 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 21:06:58 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 18:22:15 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 17:46:05 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-int		ft_file_size(int fd)
-{
-	int		cnt;
-	char	tmp;
+extern t_info g_info;
 
-	cnt = 0;
-	while (read(fd, &tmp, 1))
-		cnt++;
-	return (cnt);
+char	*ft_extend(char *line, int line_len, char *buf)
+{
+	char	*new_line;
+
+	if (!(new_line = (char *)malloc(line_len + ft_strlen(buf) + 1)))
+		return (NULL);
+	*new_line = '\0';
+	if (line != NULL)
+		ft_strcat(&new_line, line);
+	ft_strcat(&new_line, buf);
+	if (line != NULL)
+		free(line);
+	return (new_line);
 }
 
-char	*add_buf(char *file, char *buf)
+int		ft_nl_len(char *str)
 {
-	char	*res;
+	int i;
 
-	if (file == NULL)
-	{
-		res = (char *)malloc(ft_strlen(buf) + 1);
-		*res = '\0';
-		ft_strcat(&res, buf);
-	}
-	else
-	{
-		res = (char *)malloc(ft_strlen(file) + ft_strlen(buf) + 1);
-		*res = '\0';
-		ft_strcat(&res, file);
-		ft_strcat(&res, buf);
-	}
-	free(file);
-	return (res);
+	i = 0;
+	while (str[i] != '\n')
+		i++;
+	return (i);
 }
 
-char	*read_stdin(void)
+int		init_rows(char *line)
 {
-	char	buf[BUF_SIZE];
-	char	*file;
-	int		end;
+	int i;
 
-	file = NULL;
-	end = read(0, buf, BUF_SIZE - 1);
-	while (end == BUF_SIZE - 1)
+	i = -1;
+	if (line == NULL)
+		return (FAIL);
+	if (!(g_info.rows = (char *)malloc(ft_nl_len(line) + 1)))
 	{
-		buf[end] = '\0';
-		file = add_buf(file, buf);
-		end = read(0, buf, BUF_SIZE - 1);
+		free (line);
+		return (FAIL);
 	}
-	buf[end] = '\0';
-	file = add_buf(file, buf);
-	return (file);
+	while (line[++i] != '\n')
+		g_info.rows[i] = line[i];
+	g_info.rows[i] = '\0';
+	if (fill_info(line))
+	{
+		free(line);
+		return (FAIL);
+	}
+	return (SUCCESS);
+}
+
+int		ft_strcpy(char **copy, char *line)
+{
+	int			i;
+	static int	cur = 0;
+
+	i = -1;
+	if (cur == 0)
+		while (line[cur] != '\n')
+			cur++;
+	while (line[++cur] != '\n')
+		(*copy)[++i] = line[cur];
+	if (i != -1)
+		(*copy)[++i] = '\0';
+	return (i);
+}
+
+int		ft_split_size(char *line)
+{
+	static int	cur = 0;
+	int			cmp;
+
+	if (cur == 0)
+		while (line[cur] != '\n')
+			cur++;
+	cmp = cur;
+	while (line[++cur] != '\n')
+		;
+	if (cmp != cur)
+		return (cur - cmp);
+	return (0);
+}
+
+t_map	*ft_split(char *line)
+{
+	int i;
+	t_map	*map;
+
+	i = -1;
+	if (!(map = (t_map *)malloc(sizeof(t_map) * (g_info.row_len + 1))))
+	{
+		free(line);
+		return (NULL);
+	}
+	while (++i < g_info.row_len)
+		if (!(map[i].line = (char *)malloc(ft_split_size(line))))
+		{
+			free_line(map, i);
+			return (NULL);
+		}
+	map[g_info.row_len].line = NULL;
+	i = 0;
+	while (i < g_info.row_len)
+	{
+		if (ft_strcpy(&map[i].line, line) == -1)
+			continue ;
+		i++;
+	}
+	free(line);
+	return (map);
 }

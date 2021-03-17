@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:18:46 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/16 20:19:17 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/17 17:12:27 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,14 @@
 
 t_info	g_info;
 
-void	bsq(int cnt_fd, int rd_fd)
+void	bsq(t_map *map)
 {
-	t_map	*map;
 	t_xy	loc;
 
-	// 인자로 주어진 파일을 읽으면서 error체크와 동시에 map에 저장
-	map = check_err(cnt_fd, rd_fd);
-	if (!map)
-	{
-		print_err(ERR_MSG);
-		return ;
-	}
+	loc.max = 0;
+	loc.x = 0;
+	loc.y = 0;
+	//bsq들어가서 errmsg를 출력해야하는 케이스가 있나??
 	map_cpy(map); // map을 copy_map에 malloc하면서 cpy까지
 	change_map(map); //행,열 1번째를 1로 채우고 벽을 0을로 바꾸는거 까지
 	loc = init_loc(map);
@@ -37,32 +33,33 @@ void	bsq(int cnt_fd, int rd_fd)
 
 void	only_ac(void)
 {
-	int		cnt_fd;
-	int		rd_fd;
-	char	*f_name;
+	t_map	*map;
 
-	f_name = read_stdin();
-	cnt_fd = open(f_name, O_RDONLY);
-	rd_fd = open(f_name, O_RDONLY);
-	bsq(cnt_fd, rd_fd);
-	free(f_name);
-	close(cnt_fd);
-	close(rd_fd);
+	if (!(map = read_map(0)))
+	{
+		print_err(ERR_MSG);
+		return ;
+	}
+	bsq(map);
 }
 
 void	many_ac(int ac, char **av)
 {
-	int	i;
-	int	cnt_fd;
-	int	rd_fd;
+	int		i;
+	int		fd;
+	t_map	*map;
 
 	i = 0;
 	while (++i < ac)
 	{
-		cnt_fd = open(av[i], O_RDONLY);
-		rd_fd = open(av[i], O_RDONLY);
-		bsq(cnt_fd, rd_fd);
-		close(cnt_fd);
-		close(rd_fd);
+		fd = open(av[i], O_RDONLY);
+		if (!(map = read_map(fd)))
+		{
+			print_err(ERR_MSG);
+			close(fd);
+			return ;
+		}
+		bsq(map);
+		close(fd);
 	}
 }
