@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:18:46 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/18 02:20:42 by dookim           ###   ########.fr       */
+/*   Updated: 2021/03/18 10:03:09 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ void	many_ac(int ac, char **av)
 		{
 			print_err(ERR_MSG);
 			close(fd);
+			if (i != ac - 1)
+				write(2, "\n", 1);
 			continue ;
 		}
 		bsq(map);
 		close(fd);
 		g_flag++;
+		if (i != ac - 1)
+			write(1, "\n", 1);
 	}
 }
 

@@ -6,16 +6,17 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 20:47:53 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/15 20:23:04 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/18 10:04:33 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
+extern t_info g_info;
+
 void	putstr(char *str)
 {
-	while (*str)
-		write(1, str++, 1);
+	write(1, str, g_info.col_len);
 	write(1, "\n", 1);
 }
 
