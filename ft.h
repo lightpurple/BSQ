@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:06:06 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/18 02:22:02 by dookim           ###   ########.fr       */
+/*   Updated: 2021/03/18 10:10:16 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "struct.h"
-# define BUF_SIZE 300000
+# define BUF_SIZE 3000000
 # define SUCCESS 0
 # define FAIL 1
 # define LINE_END -1
