@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 21:05:26 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/18 11:04:46 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/18 12:15:30 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,18 @@ t_xy			*compare_xy(int curr, int row, int col, t_xy *loc)
 		loc->x = col;
 		loc->y = row;
 	}
-	if (curr == loc->max &&
-		(((col - curr + 1) * (col - curr + 1) +
-			(row - curr + 1) * (row - curr + 1)) <
-			((loc->x - curr + 1) * (loc->x - curr + 1) +
-			(loc->y - curr + 1) * (loc->y - curr + 1))))
+	if (curr == loc->max)
 	{
-		loc->x = col;
-		loc->y = row;
+		if (row < loc->y)
+		{
+			loc->x = col;
+			loc->y = row;
+		}
+		else if (row == loc->y && col < loc->x)
+		{
+			loc->x = col;
+			loc->y = row;
+		}
 	}
 	return (loc);
 }
