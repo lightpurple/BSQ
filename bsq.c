@@ -6,7 +6,7 @@
 /*   By: euhong <euhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:18:46 by euhong            #+#    #+#             */
-/*   Updated: 2021/03/18 10:32:54 by euhong           ###   ########.fr       */
+/*   Updated: 2021/03/18 11:05:57 by euhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ t_map	*read_map(int fd)
 		free(line);
 		return (NULL);
 	}
-	if (init_rows(line, total) || !(map = ft_split(line)) || map_error_check(map))
+	if (init_rows(line, total) || !(map = ft_split(line)) ||
+			map_error_check(map))
 		return (NULL);
 	return (map);
 }
